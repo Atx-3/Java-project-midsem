@@ -16,8 +16,8 @@ public class ExpenseTracker extends JFrame {
 
     static final String DATA_FILE = "expenses.dat";
     static final String[] CATEGORIES = {
-        "ðŸ” Food", "ðŸš— Transport", "ðŸ  Housing", "ðŸ’Š Health",
-        "ðŸŽ¬ Entertainment", "ðŸ› Shopping", "ðŸ“š Education", "ðŸ’¡ Utilities", "âœˆ Travel", "ðŸ“¦ Other"
+        "Food", "Transport", "Housing", "Health",
+        "Entertainment", "Shopping", "Education", "Utilities", "Travel", "Other"
     };
     static final Color BG        = new Color(0x0F0F1A);
     static final Color CARD      = new Color(0x1A1A2E);
