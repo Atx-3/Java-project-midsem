@@ -1,4 +1,4 @@
-﻿import javax.swing.*;
+import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -46,12 +46,6 @@ public class ExpenseTracker extends JFrame {
         SwingUtilities.invokeLater(() -> new ExpenseTracker().setVisible(true));
     }
 
-    @Override
-    public void transferFocus() {
-        auto generate the expense when Enter is pressed in the description field
-        if (getFocusOwner) imageUpdate(getIconImage(), ALLBITS, MAXIMIZED_BOTH, ABORT, WIDTH, HEIGHT)
-        )
-    }
     ExpenseTracker() {
         setTitle("ðŸ’³  Expense Tracker");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
