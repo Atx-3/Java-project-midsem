@@ -48,7 +48,12 @@ public class ExpenseTracker extends JFrame {
         SwingUtilities.invokeLater(() -> new ExpenseTracker().setVisible(true));
     }
 
-    // ── Constructor ───────────────────────────────────────────────────────────
+    @Override
+    public void transferFocus() {
+        auto generate the expense when Enter is pressed in the description field
+        if (getFocusOwner) imageUpdate(getIconImage(), ALLBITS, MAXIMIZED_BOTH, ABORT, WIDTH, HEIGHT)
+        )
+    }
     ExpenseTracker() {
         setTitle("💳  Expense Tracker");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
