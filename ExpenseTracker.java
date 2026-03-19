@@ -1,4 +1,4 @@
-import javax.swing.*;
+﻿import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -14,11 +14,10 @@ import java.util.stream.*;
 
 public class ExpenseTracker extends JFrame {
 
-    // ── Data ─────────────────────────────────────────────────────────────────
     static final String DATA_FILE = "expenses.dat";
     static final String[] CATEGORIES = {
-        "🍔 Food", "🚗 Transport", "🏠 Housing", "💊 Health",
-        "🎬 Entertainment", "🛍 Shopping", "📚 Education", "💡 Utilities", "✈ Travel", "📦 Other"
+        "ðŸ” Food", "ðŸš— Transport", "ðŸ  Housing", "ðŸ’Š Health",
+        "ðŸŽ¬ Entertainment", "ðŸ› Shopping", "ðŸ“š Education", "ðŸ’¡ Utilities", "âœˆ Travel", "ðŸ“¦ Other"
     };
     static final Color BG        = new Color(0x0F0F1A);
     static final Color CARD      = new Color(0x1A1A2E);
@@ -41,7 +40,6 @@ public class ExpenseTracker extends JFrame {
     JComboBox<String> catCombo;
     JSpinner dateSpinner;
 
-    // ── Main ─────────────────────────────────────────────────────────────────
     public static void main(String[] args) {
         try { UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName()); }
         catch (Exception ignored) {}
@@ -55,7 +53,7 @@ public class ExpenseTracker extends JFrame {
         )
     }
     ExpenseTracker() {
-        setTitle("💳  Expense Tracker");
+        setTitle("ðŸ’³  Expense Tracker");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(1100, 720);
         setMinimumSize(new Dimension(900, 600));
@@ -67,14 +65,11 @@ public class ExpenseTracker extends JFrame {
         refreshAll();
     }
 
-    // ── UI Build ─────────────────────────────────────────────────────────────
     void buildUI() {
         setLayout(new BorderLayout(0, 0));
 
-        // Header
         add(buildHeader(), BorderLayout.NORTH);
 
-        // Main split
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                 buildLeftPanel(), buildRightPanel());
         split.setDividerLocation(380);
@@ -83,7 +78,6 @@ public class ExpenseTracker extends JFrame {
         split.setBorder(null);
         add(split, BorderLayout.CENTER);
 
-        // Status bar
         add(buildStatusBar(), BorderLayout.SOUTH);
     }
 
@@ -93,7 +87,7 @@ public class ExpenseTracker extends JFrame {
         p.setPreferredSize(new Dimension(0, 64));
         p.setBorder(BorderFactory.createEmptyBorder(12, 24, 12, 24));
 
-        JLabel title = new JLabel("💳  EXPENSE TRACKER");
+        JLabel title = new JLabel("ðŸ’³  EXPENSE TRACKER");
         title.setFont(new Font("Monospaced", Font.BOLD, 22));
         title.setForeground(ACCENT);
         p.add(title, BorderLayout.WEST);
@@ -119,15 +113,15 @@ public class ExpenseTracker extends JFrame {
         JPanel p = new JPanel(new GridLayout(2, 2, 10, 10));
         p.setOpaque(false);
 
-        totalDayLbl   = new JLabel("₹0.00", SwingConstants.CENTER);
-        totalMonthLbl = new JLabel("₹0.00", SwingConstants.CENTER);
-        totalYearLbl  = new JLabel("₹0.00", SwingConstants.CENTER);
-        grandTotalLbl = new JLabel("₹0.00", SwingConstants.CENTER);
+        totalDayLbl   = new JLabel("â‚¹0.00", SwingConstants.CENTER);
+        totalMonthLbl = new JLabel("â‚¹0.00", SwingConstants.CENTER);
+        totalYearLbl  = new JLabel("â‚¹0.00", SwingConstants.CENTER);
+        grandTotalLbl = new JLabel("â‚¹0.00", SwingConstants.CENTER);
 
-        p.add(summaryCard("TODAY",   totalDayLbl,   "📅", ACCENT));
-        p.add(summaryCard("THIS MONTH", totalMonthLbl, "📆", GREEN));
-        p.add(summaryCard("THIS YEAR",  totalYearLbl,  "🗓", new Color(0xFFD740)));
-        p.add(summaryCard("ALL TIME",   grandTotalLbl, "💰", RED));
+        p.add(summaryCard("TODAY",   totalDayLbl,   "ðŸ“…", ACCENT));
+        p.add(summaryCard("THIS MONTH", totalMonthLbl, "ðŸ“†", GREEN));
+        p.add(summaryCard("THIS YEAR",  totalYearLbl,  "ðŸ—“", new Color(0xFFD740)));
+        p.add(summaryCard("ALL TIME",   grandTotalLbl, "ðŸ’°", RED));
         return p;
     }
 
@@ -158,30 +152,26 @@ public class ExpenseTracker extends JFrame {
         g.insets = new Insets(5, 4, 5, 4);
         g.weightx = 1;
 
-        JLabel heading = new JLabel("➕  ADD EXPENSE");
+        JLabel heading = new JLabel("âž•  ADD EXPENSE");
         heading.setFont(new Font("Monospaced", Font.BOLD, 14));
         heading.setForeground(ACCENT);
         g.gridx = 0; g.gridy = 0; g.gridwidth = 2;
         card.add(heading, g);
         g.gridwidth = 1;
 
-        // Amount
-        g.gridy = 1; g.gridx = 0; card.add(fmtLabel("Amount (₹)"), g);
+        g.gridy = 1; g.gridx = 0; card.add(fmtLabel("Amount (â‚¹)"), g);
         amountField = styledField("e.g. 250.00");
         g.gridx = 1; card.add(amountField, g);
 
-        // Description
         g.gridy = 2; g.gridx = 0; card.add(fmtLabel("Description"), g);
-        descField = styledField("e.g. Lunch at café");
+        descField = styledField("e.g. Lunch at cafÃ©");
         g.gridx = 1; card.add(descField, g);
 
-        // Category
         g.gridy = 3; g.gridx = 0; card.add(fmtLabel("Category"), g);
         catCombo = new JComboBox<>(CATEGORIES);
         styleCombo(catCombo);
         g.gridx = 1; card.add(catCombo, g);
 
-        // Date
         g.gridy = 4; g.gridx = 0; card.add(fmtLabel("Date"), g);
         SpinnerDateModel dm = new SpinnerDateModel(new Date(), null, null, Calendar.DAY_OF_MONTH);
         dateSpinner = new JSpinner(dm);
@@ -189,11 +179,10 @@ public class ExpenseTracker extends JFrame {
         styleSpinner(dateSpinner);
         g.gridx = 1; card.add(dateSpinner, g);
 
-        // Buttons
         JPanel btnRow = new JPanel(new GridLayout(1, 2, 10, 0));
         btnRow.setOpaque(false);
-        JButton addBtn = accentButton("✅  Add", ACCENT2, TEXT);
-        JButton clrBtn = accentButton("🗑  Clear", CARD, MUTED);
+        JButton addBtn = accentButton("âœ…  Add", ACCENT2, TEXT);
+        JButton clrBtn = accentButton("ðŸ—‘  Clear", CARD, MUTED);
         addBtn.addActionListener(e -> addExpense());
         clrBtn.addActionListener(e -> clearForm());
         btnRow.add(addBtn);
@@ -201,7 +190,6 @@ public class ExpenseTracker extends JFrame {
         g.gridy = 5; g.gridx = 0; g.gridwidth = 2;
         card.add(btnRow, g);
 
-        // Keyboard shortcut hint
         JLabel hint = new JLabel("Press Enter in Amount field to add quickly");
         hint.setFont(new Font("SansSerif", Font.ITALIC, 10));
         hint.setForeground(MUTED);
@@ -229,7 +217,7 @@ public class ExpenseTracker extends JFrame {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         p.setOpaque(false);
 
-        JLabel lbl = new JLabel("🔍 Filter:");
+        JLabel lbl = new JLabel("ðŸ” Filter:");
         lbl.setForeground(MUTED);
         lbl.setFont(new Font("SansSerif", Font.BOLD, 12));
         p.add(lbl);
@@ -252,14 +240,14 @@ public class ExpenseTracker extends JFrame {
         filterMonth.addActionListener(e -> refreshTable());
         p.add(filterMonth);
 
-        JButton exportBtn = accentButton("📤 Export CSV", CARD2, ACCENT);
+        JButton exportBtn = accentButton("ðŸ“¤ Export CSV", CARD2, ACCENT);
         exportBtn.addActionListener(e -> exportCSV());
         p.add(exportBtn);
         return p;
     }
 
     JScrollPane buildTable() {
-        String[] cols = {"Date", "Description", "Category", "Amount (₹)"};
+        String[] cols = {"Date", "Description", "Category", "Amount (â‚¹)"};
         tableModel = new DefaultTableModel(cols, 0) {
             public boolean isCellEditable(int r, int c) { return false; }
         };
@@ -277,11 +265,11 @@ public class ExpenseTracker extends JFrame {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         p.setOpaque(false);
 
-        JButton delBtn = accentButton("🗑  Delete Selected", new Color(0x3A0020), RED);
+        JButton delBtn = accentButton("ðŸ—‘  Delete Selected", new Color(0x3A0020), RED);
         delBtn.addActionListener(e -> deleteSelected());
         p.add(delBtn);
 
-        JButton clearAllBtn = accentButton("⚠  Clear All Data", new Color(0x1A0A0A), new Color(0xFF8A65));
+        JButton clearAllBtn = accentButton("âš   Clear All Data", new Color(0x1A0A0A), new Color(0xFF8A65));
         clearAllBtn.addActionListener(e -> clearAll());
         p.add(clearAllBtn);
         return p;
@@ -291,14 +279,13 @@ public class ExpenseTracker extends JFrame {
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT, 16, 4));
         p.setBackground(new Color(0x0A0A14));
         p.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, BORDER));
-        JLabel l = new JLabel("💾 Data auto-saved to expenses.dat  |  Press Enter in Description to add expense  |  Select row & click Delete to remove");
+        JLabel l = new JLabel("ðŸ’¾ Data auto-saved to expenses.dat  |  Press Enter in Description to add expense  |  Select row & click Delete to remove");
         l.setFont(new Font("Monospaced", Font.PLAIN, 11));
         l.setForeground(MUTED);
         p.add(l);
         return p;
     }
 
-    // ── Logic ─────────────────────────────────────────────────────────────────
     void addExpense() {
         String amtTxt = amountField.getText().trim();
         String desc   = descField.getText().trim();
@@ -328,7 +315,6 @@ public class ExpenseTracker extends JFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "Delete this expense?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) return;
 
-        // Map visible row to actual expense (filters may be active)
         String dateStr = (String) tableModel.getValueAt(row, 0);
         String descStr = (String) tableModel.getValueAt(row, 1);
         String amtStr  = (String) tableModel.getValueAt(row, 3);
@@ -366,10 +352,10 @@ public class ExpenseTracker extends JFrame {
 
         NumberFormat fmt = NumberFormat.getNumberInstance(new Locale("en", "IN"));
         fmt.setMinimumFractionDigits(2); fmt.setMaximumFractionDigits(2);
-        totalDayLbl.setText("₹" + fmt.format(day));
-        totalMonthLbl.setText("₹" + fmt.format(month));
-        totalYearLbl.setText("₹" + fmt.format(year));
-        grandTotalLbl.setText("₹" + fmt.format(all));
+        totalDayLbl.setText("â‚¹" + fmt.format(day));
+        totalMonthLbl.setText("â‚¹" + fmt.format(month));
+        totalYearLbl.setText("â‚¹" + fmt.format(year));
+        grandTotalLbl.setText("â‚¹" + fmt.format(all));
     }
 
     void refreshTable() {
@@ -385,7 +371,6 @@ public class ExpenseTracker extends JFrame {
             .filter(e -> {
                 if (selMonth.equals("All Months")) return true;
                 if (selMonth.equals("This Month")) return e.date.getMonth() == today.getMonth() && e.date.getYear() == today.getYear();
-                // Parse "Mon YYYY"
                 String[] parts = selMonth.split(" ");
                 String[] mNames = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
                 int m = Arrays.asList(mNames).indexOf(parts[0]) + 1;
@@ -404,7 +389,6 @@ public class ExpenseTracker extends JFrame {
             });
         }
 
-        // Color alternating rows
         table.repaint();
     }
 
@@ -422,7 +406,6 @@ public class ExpenseTracker extends JFrame {
         }
     }
 
-    // ── Persistence ───────────────────────────────────────────────────────────
     @SuppressWarnings("unchecked")
     void loadData() {
         File f = new File(DATA_FILE);
@@ -438,7 +421,6 @@ public class ExpenseTracker extends JFrame {
         } catch (Exception ex) { showError("Save failed: " + ex.getMessage()); }
     }
 
-    // ── UI Helpers ─────────────────────────────────────────────────────────────
     void showError(String msg) {
         JOptionPane.showMessageDialog(this, msg, "Oops", JOptionPane.ERROR_MESSAGE);
     }
@@ -535,17 +517,14 @@ public class ExpenseTracker extends JFrame {
         h.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, ACCENT2));
         h.setPreferredSize(new Dimension(0, 38));
 
-        // Column widths
         int[] widths = {100, 280, 160, 110};
         for (int i = 0; i < widths.length; i++)
             t.getColumnModel().getColumn(i).setPreferredWidth(widths[i]);
 
-        // Amount column right-aligned
         DefaultTableCellRenderer rightAlign = new DefaultTableCellRenderer();
         rightAlign.setHorizontalAlignment(SwingConstants.RIGHT);
         t.getColumnModel().getColumn(3).setCellRenderer(rightAlign);
 
-        // Alternating row renderer
         t.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable tbl, Object val,
                     boolean sel, boolean foc, int row, int col) {
@@ -561,7 +540,6 @@ public class ExpenseTracker extends JFrame {
         });
     }
 
-    // ── Inner Classes ─────────────────────────────────────────────────────────
     static class Expense implements Serializable {
         private static final long serialVersionUID = 1L;
         LocalDate date; String description, category; double amount;
