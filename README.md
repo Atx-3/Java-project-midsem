@@ -113,4 +113,5 @@ To start fresh, close the app and remove `expenses.dat`.
 ## Author
 
 Built for learning and practical personal finance tracking using Java desktop UI.
+.
 
